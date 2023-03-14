@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoPower } from 'react-icons/io5'
 import { FaRegLightbulb, FaLightbulb } from 'react-icons/fa';

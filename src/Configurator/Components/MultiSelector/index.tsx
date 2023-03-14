@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiChevronDown, FiChevronUp, FiCheck } from 'react-icons/fi';
 import {Enum} from "../../../types";
 

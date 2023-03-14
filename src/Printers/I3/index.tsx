@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useDimensions from "react-cool-dimensions";
 import ThreedyContext from '../../Contexts/ThreedyContext';
 import { animate, motion, useMotionValue } from "framer-motion"

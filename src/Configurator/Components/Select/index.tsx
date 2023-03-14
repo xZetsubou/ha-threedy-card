@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useElementScroll } from 'framer-motion';
-import useEventListener from "@use-it/event-listener";
-
+import React, { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 
 import styles from './styles';
 import {Enum} from "../../../types";
 
-const Option = ({ onClick, children }) => {
+type OptionProps = {
+    onClick: () => void;
+}
+
+const Option: React.FC<OptionProps> = ({ onClick, children }) => {
 
     const [active, setActive] = useState(false);
 
@@ -38,7 +40,7 @@ type SelectProps = {
     options: Enum;
     placeholder: string;
     initial: string;
-    onSelect(s: any);
+    onSelect: (s: any) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ options, placeholder, initial, onSelect = (s) => { } }) => {

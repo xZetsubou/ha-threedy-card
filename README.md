@@ -1,26 +1,8 @@
-___
-# **IMPORTANT: threedy v2.0**
-### I am currently working on a rewrite for this card with `preact` instead of `react`. 
-
-This will yield a lighter-weight card. I will also be tackling the bugs opened as issues in this rewrite -- using TypeScript from the get-go will help this (versus when I switched mid-development). Thank you for your support and patience!!!
-
-### [View the development branch for threedy v2.0 here!](https://github.com/dangreco/threedy/tree/threedy2.0)
-
-
-___
-
-
-<br />
-<br />
-
 # threedy
 ## Home Asssistant card for 3D printers (via OctoPrint integration)
 
 
-![Featured](https://github.com/dangreco/threedy/raw/master/screenshots/active.png)
-
-<a href="https://www.buymeacoffee.com/dangreco" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
+![Featured](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/active.png)
 
 # Table of Contents
 - [Features](#-features)
@@ -67,7 +49,7 @@ ___
 ### Method 1: HACS
 1. Open _HACS_ and navigate to _Frontend_ Section
 2. Open the Overflow Menu (⋮) in the top right corner and click on _Custom repositories_
-3. Paste `https://github.com/dangreco/threedy` into the input field and select `Lovelace` from the dropdown
+3. Paste `https://github.com/e11en/ha-threedy-card` into the input field and select `Lovelace` from the dropdown
 4. Click the Install Button on the highlighted Card titled _threedy_
 
 ### Method 2: Manual
@@ -88,7 +70,7 @@ ___
 
 ### Graphical (Recommended)
 
-![graphical](https://github.com/dangreco/threedy/raw/master/screenshots/graphical.png)
+![graphical](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/graphical.png)
 
 
 ### Manual
@@ -166,15 +148,15 @@ card:
 
 ### Active Print
 
-![Active](https://github.com/dangreco/threedy/raw/master/screenshots/active.png)
+![Active](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/active.png)
 
 ### Idle
 
-![Idle](https://github.com/dangreco/threedy/raw/master/screenshots/idle.png)
+![Idle](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/idle.png)
 
 ### Printer Offline
 
-![Offline](https://github.com/dangreco/threedy/raw/master/screenshots/offline.png)
+![Offline](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/offline.png)
 
 ### Show/Hide Animation
 

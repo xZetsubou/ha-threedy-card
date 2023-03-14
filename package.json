@@ -1,10 +1,10 @@
 {
-  "name": "threedy",
+  "name": "ha-threedy-card",
   "version": "1.0.0",
   "description": "Home Assistant card for 3D printer status and management.",
   "main": "src/index.tsx",
-  "repository": "https://github.com/dangreco/threedy",
-  "author": "Dan Greco",
+  "repository": "https://github.com/e11en/ha-threedy-card",
+  "author": "Ellen Langelaar",
   "license": "MIT",
   "dependencies": {
     "@use-it/event-listener": "^0.1.6",
