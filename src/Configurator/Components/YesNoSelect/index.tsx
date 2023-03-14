@@ -44,13 +44,13 @@ type YesNoSelectProps = {
 const YesNoSelect: React.FC<YesNoSelectProps> = ({ placeholder, initial, onSelect = (s) => { } }) => {
 
     console.log("YesNoSelect Initial", initial);
-    const [selection, setSelection] = useState(initial);
-    const [hidden, setHidden] = useState(true);
-    const [active, setActive] = useState(false);
     const options = [
         {key: "Yes", value: true},
         {key: "No", value: false}
     ];
+    const [selection, setSelection] = useState(initial ? "Yes" : "No");
+    const [hidden, setHidden] = useState(true);
+    const [active, setActive] = useState(false);
 
     const selectRef = useRef();
     const optionsRef = useRef();
