@@ -24,7 +24,7 @@ const Card = ({ }) => {
     const [
         hiddenOverride,
         setHiddenOveride
-    ] = useState(false);
+    ] = useState(config.always_show ?? false);
 
     const [
         showVideo,

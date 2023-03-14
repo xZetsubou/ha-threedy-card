@@ -46,7 +46,7 @@ export type ThreedyConfig = {
     light_entity?: string,
     power_entity?: string,
     camera_entity?: string,
-
+    always_show?: boolean;
 }
 
 

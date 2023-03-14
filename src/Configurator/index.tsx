@@ -5,6 +5,7 @@ import Button from './Components/Button';
 import Input from './Components/Input';
 import MultiSelector from './Components/MultiSelector';
 import Select from './Components/Select';
+import YesNoSelect from './Components/YesNoSelect';
 
 import {
     getCameras,
@@ -110,6 +111,13 @@ const Configurator = ({ hass, config, threedy }) => {
                                 <Button onClick={() => setAdvancedShown(false)} style={{ alignSelf: 'center' }}>
                                     Back
                                 </Button>
+
+                                <p style={{ ...styles.Label }}>Always show</p>
+                                <YesNoSelect
+                                    placeholder={"Select..."}
+                                    onSelect={({key, value}) => _updateValue('always_show', value)}
+                                    initial={config.always_show}
+                                />
 
 
                                 <p style={{ ...styles.Label }}>Theme</p>

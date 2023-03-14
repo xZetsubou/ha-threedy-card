@@ -97,6 +97,7 @@
 - ```camera_entity``` &mdash; Specify the entity ID of the camera entity you want to display **when the printer graphic is clicked**.
 - ```light_entity``` &mdash; Specify the entity ID of a light you want to toggle for the printer.
 - ```power_entity``` &mdash; Specify the entity ID of a power switch you want to toggle for the printer.
+- ```always_show``` &mdash; Override the auto collapse of the card.
 
 ## Example Config
 ---
@@ -119,6 +120,7 @@ theme: 'Default'
 font: 'Roboto'
 scale: 1.0
 round: false 
+always_show: true
 ```
 
 ## Custom Theming
