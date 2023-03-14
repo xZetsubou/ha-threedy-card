@@ -44,13 +44,14 @@ const renderCondition = (
 
     const entity = (suffix: string) => getEntity(hass, `${config.base_entity}${suffix}`);
     const mqtt = config.use_mqtt;
+    const printerStatus = entity( mqtt ? '_print_status' : '_current_state').state;
 
     switch (condition) {
         case ThreedyCondition.Status:
             return (
                 <Stat
                     name={"Status"}
-                    value={ entity( mqtt ? '_print_status' : '_current_state').state }
+                    value={printerStatus}
                 />
             )
         case ThreedyCondition.ETA:
@@ -60,6 +61,7 @@ const renderCondition = (
                     condition={condition}
                     config={config}
                     direction={0}
+                    status={printerStatus}
                 />
             )
         case ThreedyCondition.Elapsed:
@@ -69,6 +71,7 @@ const renderCondition = (
                     condition={condition}
                     config={config}
                     direction={1}
+                    status={printerStatus}
                 />
             )
 
@@ -79,6 +82,7 @@ const renderCondition = (
                     condition={condition}
                     config={config}
                     direction={-1}
+                    status={printerStatus}
                 />
             )
 

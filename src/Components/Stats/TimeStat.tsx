@@ -70,14 +70,16 @@ type TimeStatProps = {
     condition: ThreedyCondition
     config: ThreedyConfig,
     direction: number
+    status: string
 }
 
-const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direction}) => {
+const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direction, status}) => {
     const totalSeconds = getTotalSeconds(timeEntity, config);
     const [ time, setTime ] = useState<number>(totalSeconds);
     const [ lastIntervalId, setLastIntervalId ] = useState<number>(-1);
 
     const incTime = () => setTime( time => (parseInt(time) + parseInt(direction)) );
+    const showEmpty = status != "Printing";
 
     useEffect(() => {
 
@@ -92,18 +94,12 @@ const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direc
 
         setLastIntervalId(id);
 
-    }, [timeEntity])
+    }, [timeEntity]);
 
     return (
         <Stat
             name={condition}
-            value={
-                renderTime(
-                    time,
-                    condition,
-                    config
-                )
-            }
+            value={ showEmpty ? "-" : renderTime(time, condition, config )}
         />
     )
 
