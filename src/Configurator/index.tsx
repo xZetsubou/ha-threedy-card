@@ -35,7 +35,10 @@ const Configurator = ({ hass, config, threedy }) => {
     }, [config])
 
     const _updateConfig = ( updates ) => setModifiedConfig( updateConfig(threedy, modifiedConfig, updates) );
-    const _updateValue = (key, value) => updateValue( _updateConfig, key, value);
+    const _updateValue = (key, value) => {
+        console.log("Update value", key, value);
+        updateValue( _updateConfig, key, value);
+    }
 
     if (!config) return (<div/>)
 
@@ -115,7 +118,7 @@ const Configurator = ({ hass, config, threedy }) => {
                                 <p style={{ ...styles.Label }}>Always show</p>
                                 <YesNoSelect
                                     placeholder={"Select..."}
-                                    onSelect={({key, value}) => _updateValue('always_show', value)}
+                                    onSelect={(value) => _updateValue('always_show', value)}
                                     initial={config.always_show}
                                 />
 
