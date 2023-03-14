@@ -62,9 +62,9 @@ const YesNoSelect: React.FC<YesNoSelectProps> = ({ placeholder, initial, onSelec
         setHidden(true);
     }
 
-    const selectOption = (value) => {
-        setSelection(value);
-        onSelect(value)
+    const selectOption = (option) => {
+        setSelection(option.key);
+        onSelect(option.value)
         hideOptions();
     }
 
@@ -104,9 +104,9 @@ const YesNoSelect: React.FC<YesNoSelectProps> = ({ placeholder, initial, onSelec
                 style={{ ...styles.Options }}
             >
                 {
-                    Object.keys(options).map((key, value) => (
-                        <Option onClick={() => selectOption(value)}>
-                            { key }
+                    options.map((option) => (
+                        <Option onClick={() => selectOption(option)}>
+                            { option.key }
                         </Option>
                     ))
                 }
