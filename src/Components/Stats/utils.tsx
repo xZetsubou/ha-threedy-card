@@ -45,6 +45,7 @@ const renderCondition = (
     const entity = (suffix: string) => getEntity(hass, `${config.base_entity}${suffix}`);
     const mqtt = config.use_mqtt;
     const printerStatus = entity( mqtt ? '_print_status' : '_current_state').state;
+    const entity_attrs = entity('_print_progress').attributes || undefined;
 
     switch (condition) {
         case ThreedyCondition.Status:
@@ -57,7 +58,8 @@ const renderCondition = (
         case ThreedyCondition.ETA:
             return (
                 <TimeStat
-                    timeEntity={ entity( mqtt ? '_print_time_left' : '_time_remaining' ) }
+                    timeEntity={ mqtt ? entity('_print_time_left') : entity('_time_remaining') }
+                    attr={mqtt ? entity_attrs.printTimeLeft : undefined}
                     condition={condition}
                     config={config}
                     direction={0}
@@ -67,7 +69,8 @@ const renderCondition = (
         case ThreedyCondition.Elapsed:
             return (
                 <TimeStat
-                    timeEntity={ entity( mqtt ? '_print_time' : '_time_elapsed' ) }
+                    timeEntity={ mqtt ? entity('_print_time') : entity('_time_elapsed')  }
+                    attr={mqtt ? entity_attrs.printTime : undefined}
                     condition={condition}
                     config={config}
                     direction={1}
@@ -78,7 +81,8 @@ const renderCondition = (
         case ThreedyCondition.Remaining:
             return (
                 <TimeStat
-                    timeEntity={ entity( mqtt ? '_print_time_left' : '_time_remaining' ) }
+                    timeEntity={ mqtt ? entity('_print_time_left') : entity('_time_remaining') }
+                    attr={mqtt ? entity_attrs.printTimeLeft : undefined}
                     condition={condition}
                     config={config}
                     direction={-1}
