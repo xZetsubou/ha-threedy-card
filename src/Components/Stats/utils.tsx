@@ -55,7 +55,7 @@ const renderCondition = (
         cus_attr =  cus_entity ? cus_entity.attributes[cus_sensor['attribute']] : undefined;
         // Status
         const cus_status = ThreedyCondition.Status in config.sensors ? config.sensors[ThreedyCondition.Status] : undefined;
-        const status_entity = cus_status['entity'] ? getEntity(hass, cus_status['entity']) : undefined,
+        const status_entity = cus_status ? getEntity(hass, cus_status['entity']) : undefined,
                 status_attr = status_entity?.attributes[cus_status['attribute']] || undefined
         printerStatus = printerStatus || status_attr || status_entity?.state
     }
@@ -160,7 +160,7 @@ const percentComplete = (
     hass: HomeAssistant,
     config: ThreedyConfig
 ) => {
-    let cus_sensor = config.sensors ? config.sensors['progress'] : undefined;
+    let cus_sensor = config.sensors ? config.sensors['Progress'] || config.sensors['progress'] : undefined;
     let cus_entity = cus_sensor ? getEntity(hass, cus_sensor['entity']) : undefined;
     let cus_attr = cus_entity?.attributes[cus_sensor['attribute']] || undefined;
     return (

@@ -52,7 +52,7 @@ const Card = ({ }) => {
 
     if (config.sensors){
         const cus_status = ThreedyCondition.Status in config.sensors ? config.sensors[ThreedyCondition.Status] : undefined;
-        cus_entity = cus_status['entity'] ? hass.states[cus_status['entity']] : undefined,
+        cus_entity = cus_status ? hass.states[cus_status['entity']] : undefined,
         cus_attr = cus_entity?.attributes[cus_status['attribute']] || undefined
     }
     const state = cus_attr || cus_entity?.state || (hass.states[config.use_mqtt ? `${config.base_entity}_print_status` : `${config.base_entity}_current_state`] || {state: 'unknown'}).state;
