@@ -4,7 +4,7 @@
   "description": "Home Assistant card for 3D printer status and management.",
   "main": "src/index.tsx",
   "repository": "https://github.com/e11en/ha-threedy-card",
-  "author": "Ellen Langelaar",
+  "author": "xZ",
   "license": "MIT",
   "dependencies": {
     "@use-it/event-listener": "^0.1.6",
