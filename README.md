@@ -15,6 +15,7 @@
   - [Manual](#manual)
     - [Required](#required)
     - [Optional](#optional)
+- [Example Sensors config](#Example%20Sensors%20config)
 - [Example Config](#-example-config)
 - [Custom Theming](#-custom-theming)
 - [Screenshots](#-screenshots)
