@@ -40,6 +40,8 @@
 - [Home Assistant](https://www.home-assistant.io/) instance
 - Expose the required data to homeassistant.
 
+
+
 <details>
   <summary>Installation</summary>
 
@@ -103,7 +105,7 @@
 - ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
 - ```camera_mirror``` &mdash; Mirror camera. ``default: false``
 - ```sensors``` &mdash; over any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
-  > Sensors Options ``progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
+  > Sensors Options ``Progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
 
   > Customize sensors should allow you to run the card for moonraker etc...
 
@@ -128,7 +130,7 @@ monitored:
   - Hotend
   - Bed
 sensors:
-  progress:
+  Progress:
     entity: sensor.octoprint_print_progress
   Elapsed: # Require Status to be existed
     entity: sensor.octoprint_print_progress
