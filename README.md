@@ -1,28 +1,26 @@
 # threedy
-## Home Asssistant card for 3D printers (via OctoPrint integration)
+## Home Asssistant card for 3D printers
 
 
-![Featured](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/active.png)
+![Featured](https://github.com/xZetsubou/ha-threedy-card/raw/master/screenshots/active.png)
 
 # Table of Contents
-- [Features](#-features)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-  - [Method 1: HACS](#method-1-hacs)
-  - [Method 2: Manual](#method-2-manual)
-- [Config](#-config)
-  - [Graphical](#-Graphical)
-  - [Manual](#manual)
-    - [Required](#required)
-    - [Optional](#optional)
-- [Example Sensors config](#example-sensors-config)
-- [Example Config](#example-config)
-- [Custom Theming](#custom-theming)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  * [Method 1: HACS](#method-1--hacs)
+  * [Method 2: Manual](#method-2--manual)
+- [Config](#config)
+  * [Graphical](#graphical)
+  * [Manual](#manual)
+    + [Required](#required)
+    + [Optional](#optional)
+- [Examples](#examples)
 - [Screenshots](#screenshots)
-  - [Active Print](#active-print)
-  - [Idle](#idle)
-  - [Printer Offline](#printer-offline)
-  - [Show/Hide Animation](#showhide-animation)
+  * [Active Print](#active-print)
+  * [Idle](#idle)
+  * [Printer Offline](#printer-offline)
+  * [Show/Hide Animation](#show-hide-animation)
 
 ## Features
 ---
@@ -39,18 +37,18 @@
 
 ## Prerequisites
 ---
-- [OctoPrint](https://octoprint.org/)-enabled 3D printer
 - [Home Assistant](https://www.home-assistant.io/) instance
-- Home Assistant [OctoPrint integration](https://www.home-assistant.io/integrations/octoprint/)
-  - *** Make sure to expose all available data entities for your printer! ***
+- Expose the required data to homeassistant.
 
+<details>
+  <summary>Installation</summary>
 
 ## Installation
 ---
 ### Method 1: HACS
 1. Open _HACS_ and navigate to _Frontend_ Section
 2. Open the Overflow Menu (⋮) in the top right corner and click on _Custom repositories_
-3. Paste `https://github.com/e11en/ha-threedy-card` into the input field and select `Lovelace` from the dropdown
+3. Paste `https://github.com/xZetsubou/ha-threedy-card` into the input field and select `Lovelace` from the dropdown
 4. Click the Install Button on the highlighted Card titled _threedy_
 
 ### Method 2: Manual
@@ -64,22 +62,25 @@
 5. Add a manual card to your lovelace dashboard using the configuration instructions below.
 6. Restart Server management
 7. Reload Browser
-
+</details>
 
 ## Config
 ---
 
-### Graphical (Recommended)
+<details>
+  <summary>Card Config UI (Don't have all the features yet)</summary>
 
-![graphical](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/graphical.png)
+### Graphical
 
+![graphical](https://github.com/xZetsubou/ha-threedy-card/raw/master/screenshots/graphical.png)
+</details>
 
 ### Manual
 
 #### Required
 
 - ```type``` &mdash; Always ```'custom:threedy-card'```
-- ```base_entity``` &mdash; Take the beginning of one of the OctoPrint sensors of your printer. Example: for ```sensor.ender_3_v2_current_state``` it would be ```sensor_ender_3_v2```.
+- ```base_entity``` &mdash; `not needed if gonna reconfig ALL sensors` Take the beginning of one of the OctoPrint sensors of your printer. Example: for ```sensor.ender_3_v2_current_state``` it would be ```sensor_ender_3_v2```.
 - ```name``` &mdash; Can be whatever you want!
 - ```printer_type``` &mdash; Use a  printer style: ```'I3' | 'Cantilever' ```
 - ```monitored``` &mdash; A list of values to monitor throughout the print; gets displayed to the right of the printer.
@@ -101,24 +102,41 @@
 - ```always_show``` &mdash; Override the auto collapse of the card.
 - ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
 - ```camera_mirror``` &mdash; Mirror camera. ``default: false``
-- ```sensors``` &mdash; override any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
+- ```sensors``` &mdash; over any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
   > Sensors Options ``progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
 
-  > Customize sensors should allow you to run the card for moonraker etc... 
-## Example Sensors config:
+  > Customize sensors should allow you to run the card for moonraker etc...
+
+## Examples
+
+<details>
+  <summary>Example Sensors w/ override Sensors</summary>
+  
 ---
 ```yaml
 # << configs
+# Rather then specify 'base_entity' you can config each sensor.
+type: 'custom:threedy-card'
+base_entity: '' # You can use it if you want to override some of sensors and let some use base_etntity
+name: 'Ender 3 Pro'
+printer_type: I3
+monitored:
+  - Status
+  - ETA
+  - Elapsed
+  - Remaining
+  - Hotend
+  - Bed
 sensors:
   progress:
     entity: sensor.octoprint_print_progress
-  Elapsed: # Require Status
+  Elapsed: # Require Status to be existed
     entity: sensor.octoprint_print_progress
     attribute: printTime
-  Remaining: # Require Status
+  Remaining: # Require Status to be existed
     entity: sensor.octoprint_print_progress
     attribute: printTimeLeft
-  ETA: # Require Status
+  ETA: # Require Status to be existed
     entity: sensor.octoprint_print_progress
     attribute: printTimeLeft
   Status:
@@ -128,15 +146,17 @@ sensors:
   Bed:
     entity: sensor.octoprint_bed_temperature
 ```
----
-## Example Config
----
+</details>
 
+<details>
+  <summary>Example Config</summary>
+
+---
 ```yaml
 # required
 type: 'custom:threedy-card'
 base_entity: 'sensor.ender_3_v2'
-name: 'Ender 3 v2'
+name: 'Ender 3 Pro'
 printer_type: I3
 monitored:
   - Status
@@ -152,8 +172,11 @@ scale: 1.0
 round: false 
 always_show: true
 ```
+</details>
 
-## Custom Theming
+<details>
+  <summary>Custom Theming</summary>
+
 ---
 
 Custom theming can be accomplished using [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod#mod-card)'s ```mod-card```.
@@ -173,24 +196,31 @@ card:
     .
     <card config>
 ```
+</details>
+
+
 
 
 ## Screenshots
 ---
 
+<details>
+  <summary>Screenshot</summary>
+
 ### Active Print
 
-![Active](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/active.png)
+![Active](https://github.com/xZetsubou/ha-threedy-card/raw/master/screenshots/active.png)
 
 ### Idle
 
-![Idle](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/idle.png)
+![Idle](https://github.com/xZetsubou/ha-threedy-card/raw/master/screenshots/idle.png)
 
 ### Printer Offline
 
-![Offline](https://github.com/e11en/ha-threedy-card/raw/master/screenshots/offline.png)
+![Offline](https://github.com/xZetsubou/ha-threedy-card/raw/master/screenshots/offline.png)
 
 ### Show/Hide Animation
 
 ![ShowHide](https://media.giphy.com/media/14VgtFSulJkOaRiZFo/giphy.gif)
 
+</details>
