@@ -98,7 +98,34 @@
 - ```light_entity``` &mdash; Specify the entity ID of a light you want to toggle for the printer.
 - ```power_entity``` &mdash; Specify the entity ID of a power switch you want to toggle for the printer.
 - ```always_show``` &mdash; Override the auto collapse of the card.
-
+- ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
+- ```camera_mirror``` &mdash; Mirror camera. ``default: false``
+- ```sensors``` &mdash; override any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
+- &mdash;  ``progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
+## Example Sensors config:
+---
+```yaml
+# << configs
+sensors:
+  progress:
+    entity: sensor.octoprint_print_progress
+  Elapsed: # Require Status
+    entity: sensor.octoprint_print_progress
+    attribute: printTime
+  Remaining: # Require Status
+    entity: sensor.octoprint_print_progress
+    attribute: printTimeLeft
+  ETA: # Require Status
+    entity: sensor.octoprint_print_progress
+    attribute: printTimeLeft
+  Status:
+    entity: sensor.octoprint_print_status
+  Hotend:
+    entity: sensor.octoprint_tool_0_temperature
+  Bed:
+    entity: sensor.octoprint_bed_temperature
+```
+---
 ## Example Config
 ---
 
