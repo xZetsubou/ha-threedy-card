@@ -89,6 +89,7 @@ const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direc
     useEffect(() => {
 
         if (lastIntervalId !== -1) clearInterval(lastIntervalId);
+
         setTime(getTotalSeconds(timeEntity, config, attr));
 
         const id = setInterval(
