@@ -58,14 +58,8 @@ const renderCondition = (
         const status_entity = cus_status['entity'] ? getEntity(hass, cus_status['entity']) : undefined,
                 status_attr = status_entity?.attributes[cus_status['attribute']] || undefined
         printerStatus = printerStatus || status_attr || status_entity?.state
-        // printerStatus = ThreedyCondition.Status in config.sensors ? config.sensors[ThreedyCondition.Status]['entity']
-        // console.log("cus_sensor: ",cus_sensor ? true : false)
-        // console.log("cus_entity: ",cus_sensor['entity'])
-        // console.log("cus_attr: ",cus_sensor['attribute'])
     }
 
-    console.log(cus_entity)
-    console.log("ww", cus_attr)
     switch (condition) {
         case ThreedyCondition.Status:
             return (

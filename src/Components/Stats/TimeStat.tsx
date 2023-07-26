@@ -55,7 +55,6 @@ const getTotalSeconds = (
         result = timeEntity != undefined ? parseInt(timeEntity?.state) : 0;
     } else {
         if (attr){
-            console.log("wwwwwwwwwwwwwwwwww", attr)
             result = parseInt(attr);
         }
         else if(timeEntity?.state){
