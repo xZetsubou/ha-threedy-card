@@ -1,14 +1,17 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import ReactPlayer from 'react-player'
 
 import { motion } from 'framer-motion';
 
 import styles from './styles'
 import useDimensions from "react-cool-dimensions";
+import ThreedyContext from '../../Contexts/ThreedyContext';
 
 
 const Camera = ({ visible, toggleVideo, cameraEntity }) => {
 
+    const { config } = useContext(ThreedyContext);
+    
     const { ref, width, height, entry, unobserve, observe } = useDimensions();
 
     const wrapper = useRef();
@@ -48,7 +51,9 @@ const Camera = ({ visible, toggleVideo, cameraEntity }) => {
 
                             : 'none',
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                    backgroundPosition: 'center',
+                    transform: config.camera_rotate == true && config.camera_mirror == true ? `rotate(180deg) scaleX(-1)` :
+                    config.camera_rotate == true ? `rotate(180deg)` : config.camera_mirror == true ? `scaleX(-1)` : ``
                 }}
                 ref={wrapper}
             >

@@ -12,6 +12,7 @@ import Stats from '../Stats';
 import styles from './styles';
 import Camera from "../Camera";
 import {percentComplete} from "../Stats/utils";
+import { ThreedyCondition } from '../../types';
 
 
 const Card = ({ }) => {
@@ -47,7 +48,15 @@ const Card = ({ }) => {
 
     const borderRadius = styles[theme] ? styles[theme].borderRadius : styles['Default'].borderRadius;
 
-    const state = (hass.states[config.use_mqtt ? `${config.base_entity}_print_status` : `${config.base_entity}_current_state`] || {state: 'unknown'}).state
+    let cus_entity, cus_attr
+
+    if (config.sensors){
+        const cus_status = ThreedyCondition.Status in config.sensors ? config.sensors[ThreedyCondition.Status] : undefined;
+        cus_entity = cus_status['entity'] ? hass.states[cus_status['entity']] : undefined,
+        cus_attr = cus_entity?.attributes[cus_status['attribute']] || undefined
+    }
+    const state = cus_attr || cus_entity?.state || (hass.states[config.use_mqtt ? `${config.base_entity}_print_status` : `${config.base_entity}_current_state`] || {state: 'unknown'}).state;
+
     const light_on = config.light_entity ? (hass.states[config.light_entity] || {state: 'off'}).state === 'on' : false;
 
     const neumorphicShadow = hass.themes.darkMode ? '-5px -5px 8px rgba(50, 50, 50,.2),5px 5px 8px rgba(0,0,0,.08)' : '-4px -4px 8px rgba(255,255,255,.5),5px 5px 8px rgba(0,0,0,.03)'
