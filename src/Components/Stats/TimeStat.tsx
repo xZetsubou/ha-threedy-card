@@ -47,14 +47,19 @@ const renderTime = (
 
 const getTotalSeconds = (
     timeEntity: HassEntity,
-    config: ThreedyConfig
+    config: ThreedyConfig,
+    attr: string
 ) => { 
     let result;   
-    if(!config.use_mqtt){
-        result = timeEntity != undefined ? parseInt(timeEntity.state) : 0;
+    if(!config.use_mqtt && !attr){
+        result = timeEntity != undefined ? parseInt(timeEntity?.state) : 0;
     } else {
-        if(timeEntity.state){
-            const [hours, minutes, seconds] = timeEntity.state.split(':');
+        if (attr){
+            console.log("wwwwwwwwwwwwwwwwww", attr)
+            result = parseInt(attr);
+        }
+        else if(timeEntity?.state){
+            const [hours, minutes, seconds] = timeEntity?.state.split(':');
             result = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
 
         } else {
@@ -71,10 +76,11 @@ type TimeStatProps = {
     config: ThreedyConfig,
     direction: number
     status: string
+    attr: string
 }
 
-const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direction, status}) => {
-    const totalSeconds = getTotalSeconds(timeEntity, config);
+const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direction, status, attr}) => {
+    const totalSeconds = getTotalSeconds(timeEntity, config, attr);
     const [ time, setTime ] = useState<number>(totalSeconds);
     const [ lastIntervalId, setLastIntervalId ] = useState<number>(-1);
 
@@ -84,8 +90,7 @@ const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direc
     useEffect(() => {
 
         if (lastIntervalId !== -1) clearInterval(lastIntervalId);
-
-        setTime(getTotalSeconds(timeEntity, config));
+        setTime(getTotalSeconds(timeEntity, config, attr));
 
         const id = setInterval(
             incTime,

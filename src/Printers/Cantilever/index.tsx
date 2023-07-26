@@ -5,6 +5,7 @@ import ThreedyContext from '../../Contexts/ThreedyContext';
 
 import styles from './styles';
 import getDimensions from './utils';
+import { ThreedyCondition } from '../../types';
 
 const Cantilever = ({ printerConfig }) => {
 
@@ -26,10 +27,22 @@ const Cantilever = ({ printerConfig }) => {
             )
         },
     });
+    let cus_entity, cust_attr
 
-    const printing = (hass.states[config.use_mqtt ? `${config.base_entity}_print_status` : `${config.base_entity}_current_state`] || { state: "unknown" }).state === 'Printing';
-    const progress = (hass.states[config.use_mqtt ? `${config.base_entity}_print_progress` : `${config.base_entity}_job_percentage`] || { state: 0 }).state / 100;
+    if (config.sensors){
+        const cus_status = ThreedyCondition.Status in config.sensors ? config.sensors[ThreedyCondition.Status] : undefined;
+        cus_entity = cus_status['entity'] ? hass.states[cus_status['entity']] : undefined,
+        cust_attr = cus_entity?.attributes[cus_status['attribute']] || undefined
+    }
+    const printing = cust_attr || cus_entity?.state || (hass.states[config.use_mqtt ? `${config.base_entity}_print_status` : `${config.base_entity}_current_state`] || { state: "unknown" }).state === 'Printing';
 
+    if (config.sensors){
+        const cus_progress = 'progress' in config.sensors ? config.sensors['progress'] : undefined;
+        cus_entity = cus_progress['entity'] ? hass.states[cus_progress['entity']] : undefined,
+        cust_attr = cus_entity?.attributes[cus_progress['attribute']] || undefined
+    }
+    const progress = (cust_attr || cus_entity?.state || (hass.states[config.use_mqtt ? `${config.base_entity}_print_progress` : `${config.base_entity}_job_percentage`] || { state: 0 }).state) / 100;
+    
     const x = useMotionValue(0);
 
     useEffect(() => {
