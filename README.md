@@ -101,7 +101,9 @@
 - ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
 - ```camera_mirror``` &mdash; Mirror camera. ``default: false``
 - ```sensors``` &mdash; override any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
-- &mdash;  ``progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
+  > Sensors Options ``progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
+
+  > Customize sensors should allow you to run the card for moonraker etc... 
 ## Example Sensors config:
 ---
 ```yaml
