@@ -130,22 +130,22 @@ monitored:
   - Hotend
   - Bed
 sensors:
-  Progress:
+  Progress: # return the print progress | 0 - 100
+    entity: sensor.octoprint_print_progress 
+  Elapsed: # return how much time have been since print starts - Require Status to be defined | number
     entity: sensor.octoprint_print_progress
-  Elapsed: # Require Status to be existed
-    entity: sensor.octoprint_print_progress
-    attribute: printTime
-  Remaining: # Require Status to be existed
-    entity: sensor.octoprint_print_progress
-    attribute: printTimeLeft
-  ETA: # Require Status to be existed
+    attribute: printTime 
+  Remaining: # return how much time left to finish print - Require Status to be defined | number
     entity: sensor.octoprint_print_progress
     attribute: printTimeLeft
-  Status:
+  ETA: # return how much time left to finish print - Require Status to be defined | number
+    entity: sensor.octoprint_print_progress
+    attribute: printTimeLeft 
+  Status: # return the state of printer | ( printing, stopped etc.. ) 
     entity: sensor.octoprint_print_status
-  Hotend:
+  Hotend: # Return the temperature of hotend | number
     entity: sensor.octoprint_tool_0_temperature
-  Bed:
+  Bed: # Return the temperature of Bed | number
     entity: sensor.octoprint_bed_temperature
 ```
 </details>
