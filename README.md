@@ -104,7 +104,7 @@
 - ```always_show``` &mdash; Override the auto collapse of the card.
 - ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
 - ```camera_mirror``` &mdash; Mirror camera. ``default: false``
-- ```sensors``` &mdash; over any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
+- ```sensors``` &mdash; Override any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
   > Sensors Options ``Progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
 
   > Customize sensors should allow you to run the card for moonraker etc...
