@@ -54,8 +54,11 @@ const getTotalSeconds = (
     if(!config.use_mqtt && !attr){
         result = timeEntity != undefined ? parseInt(timeEntity?.state) : 0;
     } else {
-        if (attr){
-            result = parseInt(attr);
+        if (attr){  
+            const [hours, minutes, seconds] = attr?.toString()?.split(':') ? attr?.toString().split(':') : undefined;
+
+            result = ![hours,minutes,seconds].includes(undefined) ? (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds) 
+            : result = parseInt(attr);
         }
         else if(timeEntity?.state){
             const [hours, minutes, seconds] = timeEntity?.state.split(':');
