@@ -1,5 +1,5 @@
 # threedy
-## Home Asssistant card for 3D printers
+## Home Asssistant card for Any 3D printers
 
 
 ![Featured](https://github.com/xZetsubou/ha-threedy-card/raw/master/screenshots/active.png)
