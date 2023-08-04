@@ -104,8 +104,18 @@
 - ```always_show``` &mdash; Override the auto collapse of the card.
 - ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
 - ```camera_mirror``` &mdash; Mirror camera. ``default: false``
-- ```sensors``` &mdash; Override any sensor rather then depend on base_entity by sepcify Sensor `name`, > `entity`, optional `attribute`.
-  > Sensors Options ``Progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
+- ```sensors``` &mdash; Override any sensor rather then depend on base_entity by sepcify Sensor property > `name`, `entity` and `attribute`.
+  > Main Sensors options: ``Progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
+  
+  > You can add new custom sensor if you want ex
+  > ``` yaml ex
+  > monitored:
+  >   - FileName
+  > sensros:
+  >   FileName:
+  >     name: FileName
+  >     entity: sensor.sensor.octoprint_print_file
+  > ```
 
   > Customize sensors should allow you to run the card for moonraker etc...
 
@@ -138,6 +148,7 @@ sensors:
   Remaining: # return how much time left to finish print - Require Status to be defined | number
     entity: sensor.octoprint_print_progress
     attribute: printTimeLeft
+    name: Rem
   ETA: # return how much time left to finish print - Require Status to be defined | number
     entity: sensor.octoprint_print_progress
     attribute: printTimeLeft 
