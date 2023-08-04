@@ -47,12 +47,14 @@ const renderCondition = (
     let printerStatus = entity( mqtt ? '_print_status' : '_current_state')?.state;
     const entity_attrs = entity('_print_progress')?.attributes || undefined;
     // Add custom entites
-    let cus_entity, cus_attr: string;
+    let cus_entity, cus_attr: string, cus_name: string;
     if (config.sensors)
     {
         const cus_sensor = condition in config.sensors ? config.sensors[condition] : undefined;
         cus_entity = cus_sensor ? getEntity(hass, cus_sensor['entity']) : undefined;
         cus_attr =  cus_entity ? cus_entity.attributes[cus_sensor['attribute']] : undefined;
+        cus_name =  cus_sensor ? cus_sensor['name'] : undefined;
+        
         // Status
         const cus_status = ThreedyCondition.Status in config.sensors ? config.sensors[ThreedyCondition.Status] : undefined;
         const status_entity = cus_status ? getEntity(hass, cus_status['entity']) : undefined,
@@ -72,6 +74,7 @@ const renderCondition = (
         case ThreedyCondition.ETA:
             return (
                 <TimeStat
+                    name = {cus_name || undefined}
                     timeEntity={ cus_entity || mqtt ? entity('_print_time_left') : entity('_time_remaining') }
                     attr={cus_attr != undefined ? cus_attr :
                         mqtt ? entity_attrs?.printTimeLeft : undefined}
@@ -84,6 +87,7 @@ const renderCondition = (
         case ThreedyCondition.Elapsed:
             return (
                 <TimeStat
+                    name = {cus_name || undefined}
                     timeEntity={ cus_entity || mqtt ? entity('_print_time') : entity('_time_elapsed')  }
                     attr={cus_attr != undefined ? cus_attr :
                         mqtt ? entity_attrs?.printTime : undefined}
@@ -97,6 +101,7 @@ const renderCondition = (
         case ThreedyCondition.Remaining:
             return (
                 <TimeStat
+                    name = {cus_name || undefined}
                     timeEntity={ cus_entity || mqtt ? entity('_print_time_left') : entity('_time_remaining') }
                     attr={cus_attr != undefined ? cus_attr :
                         mqtt ? entity_attrs?.printTimeLeft : undefined}
@@ -110,7 +115,7 @@ const renderCondition = (
         case ThreedyCondition.Bed:
             return (
                 <TemperatureStat
-                    name={"Bed"}
+                    name={cus_name || "Bed"}
                     temperatureEntity={ cus_entity || entity( mqtt ? '_bed_temperature' : '_actual_bed_temp' ) }
                     attr={cus_attr || undefined}
                     config={config}
@@ -120,7 +125,7 @@ const renderCondition = (
         case ThreedyCondition.Hotend:
             return (
                 <TemperatureStat
-                    name={"Hotend"}
+                    name={cus_name || "Hotend"}
                     temperatureEntity={ cus_entity || entity( mqtt ? '_tool_0_temperature' : '_actual_tool0_temp' ) }
                     attr={cus_attr || undefined}
                     config={config}
@@ -131,8 +136,8 @@ const renderCondition = (
         default:
             return (
                 <Stat
-                    name={"Unknown"}
-                    value={"<unknown>"}
+                    name={ cus_name || "Unknown" }
+                    value={ cus_attr != undefined ? cus_attr : cus_entity?.state != undefined ? cus_entity?.state : "<unknown>"}
                 />
             )
 
