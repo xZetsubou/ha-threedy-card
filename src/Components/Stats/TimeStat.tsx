@@ -81,7 +81,7 @@ type TimeStatProps = {
     attr: string
 }
 
-const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direction, status, attr}) => {
+const TimeStat: React.FC<TimeStatProps> = ({timeEntity, name, condition, config, direction, status, attr}) => {
     const totalSeconds = getTotalSeconds(timeEntity, config, attr);
     const [ time, setTime ] = useState<number>(totalSeconds);
     const [ lastIntervalId, setLastIntervalId ] = useState<number>(-1);
@@ -106,7 +106,7 @@ const TimeStat: React.FC<TimeStatProps> = ({timeEntity, condition, config, direc
 
     return (
         <Stat
-            name={condition}
+            name={name || condition}
             value={ showEmpty ? "-" : renderTime(time, condition, config )}
         />
     )
