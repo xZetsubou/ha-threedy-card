@@ -144,9 +144,9 @@ const Card = ({ }) => {
                 </div>
 
                 <motion.div
-                    style={{ ...styles.Content, flexDirection: vertical ? 'column' : 'row' }}
-                    animate={{ height: hidden ? 0.0 : 'auto', opacity: hidden ? 0.0 : 1.0, scale: hidden ? 0.0 : 1.0 }}
-                    transition={{ ease: "easeInOut", duration: 0.25 }}
+                    style={{ ...styles.Content, flexDirection: vertical ? 'column' : 'row', height: hidden ? 0.0 : 'auto', opacity: hidden ? 0.0 : 1, scale: hidden ? 0.0 : 1}}
+                    animate={!config.always_show ? { height: hidden ? 0.0 : 'auto', opacity: hidden ? 0.0 : 1.0, scale: hidden ? 0.0 : 1.0 } : ''}
+                    transition={!config.always_show ? { ease: "easeInOut", duration: 0.25 } : ''}
                 >
                     <div style={{ ...styles.Section, width: vertical ? '100%' : '50%', height: vertical ? 'auto' : '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingLeft: vertical ? 64 : 16, paddingRight: vertical ? 64 : 16 }}>
                         <PrinterView
