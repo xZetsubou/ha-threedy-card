@@ -114,7 +114,7 @@
   > sensros:
   >   FileName:
   >     name: FileName
-  >     entity: sensor.sensor.octoprint_print_file
+  >     entity: sensor.octoprint_print_file
   > ```
 
   > Customize sensors should allow you to run the card for moonraker etc...
