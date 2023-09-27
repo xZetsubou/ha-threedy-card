@@ -162,6 +162,49 @@ sensors:
 </details>
 
 <details>
+  <summary>Moonraker Example</summary>
+  
+---
+```yaml
+# Rather then specify 'base_entity' you can config each sensor.
+type: 'custom:threedy-card'
+base_entity: '' # You can use it if you want to override some of sensors and let some use base_etntity
+name: 'Ender 3 Pro'
+printer_type: I3
+camera_entity: camera.ender_3_pro_camera
+power_entity: switch.ender3pro_plug
+light_entity: light.ender3_printer
+always_show: true
+monitored: # by the order you want.
+  - Status
+  - FileName
+  - ETA
+  - Elapsed
+  - Remaining
+  - Hotend
+  - Bed
+sensors:
+  Progress: # return the print progress | 0 - 100
+    entity: sensor.ender_3_pro_plus_progress 
+  Status: # return the state of printer | ( printing, stopped etc.. ) 
+    entity: sensor.ender_3_pro_current_print_state
+  Elapsed: # return how much time have been since print starts - Require Status to be defined | number
+    entity: sensor.eender_3_pro_print_duration
+  Remaining: # return how much time left to finish print - Require Status to be defined | number
+    entity: sensor.ender_3_pro_print_eta
+  ETA: # return how much time left to finish print - Require Status to be defined | number
+    entity: sensor.ender_3_pro_print_eta
+  Hotend: # Return the temperature of hotend | number
+    entity: sensor.ender_3_pro_extruder_temperature
+  Bed: # Return the temperature of Bed | number
+    entity: sensor.ender_3_pro_bed_temperature
+  FileName:
+    name: FileName
+    entity: sensor.ender_3_pro_plus_filename
+```
+</details>
+
+<details>
   <summary>Example Config</summary>
 
 ---
