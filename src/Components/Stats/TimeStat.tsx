@@ -45,29 +45,40 @@ const renderTime = (
     }
 }
 
+const isIsoDate = (str: string) => {
+    if( str.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})[+-](\d{2})\:(\d{2})/) ) {
+        return true;
+    } else {
+        return false
+    }
+    
+}
+
+const ConvertIsoDate = (str: string) => {
+    const pad = (num: number) => { num = Math.round(num); return ((num < 10) ? '0' + num.toString() : num.toString()).replace("-","");}
+    var time = +(new Date(str)) - Date.now() ;
+    let secs = time / 1000, hrs = Math.trunc( secs / 3600 ), mins = Math.trunc( (secs % 3600) / 60 );
+    secs = secs % 60
+    
+    return `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+}
+
 const getTotalSeconds = (
     timeEntity: HassEntity,
     config: ThreedyConfig,
     attr: string
 ) => { 
+    let state = attr?.toString() || timeEntity?.state?.toString() || undefined;
+    state = isIsoDate(state) ? ConvertIsoDate(state) : state;
+
     let result;   
-    if(!config.use_mqtt && !attr){
-        result = timeEntity != undefined ? parseInt(timeEntity?.state) : 0;
-    } else {
-        if (attr != undefined) {  
-            const [hours, minutes, seconds] = attr?.toString()?.split(':') ? attr?.toString().split(':') : undefined;
-
-            result = ![hours,minutes,seconds].includes(undefined) ? (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds) 
-            : result = parseInt(attr);
-        }
-        else if(timeEntity?.state){
-            const [hours, minutes, seconds] = timeEntity?.state.split(':');
-            result = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
-
-        } else {
-            result = 0;
-        }
+    if (state != undefined) {
+        const [hours, minutes, seconds] = state?.toString()?.split(':') ? state?.toString().split(':') : undefined;
+        result = ![hours,minutes,seconds].includes(undefined) ? (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds) 
+        : result = parseInt(state);
     }
+    else { result = 0; }
+            
     return result;
 }
 
