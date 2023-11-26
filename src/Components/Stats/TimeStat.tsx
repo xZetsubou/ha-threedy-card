@@ -54,7 +54,7 @@ const isIsoDate = (str: string) => {
     
 }
 
-const ConvertIsoDate = (str: string) => {
+const convertIsoDate = (str: string) => {
     const pad = (num: number) => { num = Math.round(num); return ((num < 10) ? '0' + num.toString() : num.toString()).replace("-","");}
     var time = +(new Date(str)) - Date.now() ;
     let secs = time / 1000, hrs = Math.trunc( secs / 3600 ), mins = Math.trunc( (secs % 3600) / 60 );
@@ -69,10 +69,11 @@ const getTotalSeconds = (
     attr: string
 ) => { 
     let state = attr?.toString() || timeEntity?.state?.toString() || undefined;
-    state = isIsoDate(state) ? ConvertIsoDate(state) : state;
-
-    let result;   
+    let result;
+    
     if (state != undefined) {
+        state = isIsoDate(state) ? convertIsoDate(state) : state;
+
         const [hours, minutes, seconds] = state?.toString()?.split(':') ? state?.toString().split(':') : undefined;
         result = ![hours,minutes,seconds].includes(undefined) ? (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds) 
         : result = parseInt(state);
