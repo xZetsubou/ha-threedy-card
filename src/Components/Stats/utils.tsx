@@ -75,9 +75,8 @@ const renderCondition = (
             return (
                 <TimeStat
                     name = {cus_name || undefined}
-                    timeEntity={ cus_entity != undefined ? cus_entity : mqtt ? entity('_print_time_left') : entity('_time_remaining') }
-                    attr={cus_attr != undefined ? cus_attr :
-                        mqtt ? entity_attrs?.printTimeLeft : undefined}
+                    timeEntity={ cus_entity != undefined ? cus_entity : mqtt ? entity('_print_time_left') : entity('_estimated_finish_time') }
+                    attr={cus_attr != undefined ? cus_attr : mqtt ? entity_attrs?.printTimeLeft : undefined}
                     condition={condition}
                     config={config}
                     direction={0}
@@ -88,9 +87,8 @@ const renderCondition = (
             return (
                 <TimeStat
                     name = {cus_name || undefined}
-                    timeEntity={ cus_entity != undefined ? cus_entity : mqtt ? entity('_print_time') : entity('_time_elapsed')  }
-                    attr={cus_attr != undefined ? cus_attr :
-                        mqtt ? entity_attrs?.printTime : undefined}
+                    timeEntity={ cus_entity != undefined ? cus_entity : mqtt ? entity('_print_time') : entity('_start_time')  }
+                    attr={cus_attr != undefined ? cus_attr : mqtt ? entity_attrs?.printTime : undefined}
                     condition={condition}
                     config={config}
                     direction={1}
@@ -102,9 +100,8 @@ const renderCondition = (
             return (
                 <TimeStat
                     name = {cus_name || undefined}
-                    timeEntity={ cus_entity != undefined ? cus_entity : mqtt ? entity('_print_time_left') : entity('_time_remaining') }
-                    attr={cus_attr != undefined ? cus_attr :
-                        mqtt ? entity_attrs?.printTimeLeft : undefined}
+                    timeEntity={ cus_entity != undefined ? cus_entity : mqtt ? entity('_print_time_left') : entity('_estimated_finish_time') }
+                    attr={cus_attr != undefined ? cus_attr : mqtt ? entity_attrs?.printTimeLeft : undefined}
                     condition={condition}
                     config={config}
                     direction={-1}
