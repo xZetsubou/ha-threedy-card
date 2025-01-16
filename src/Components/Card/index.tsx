@@ -63,15 +63,23 @@ const Card = ({ }) => {
     const neumorphicShadow = hass.themes.darkMode ? '-5px -5px 8px rgba(50, 50, 50,.2),5px 5px 8px rgba(0,0,0,.08)' : '-4px -4px 8px rgba(255,255,255,.5),5px 5px 8px rgba(0,0,0,.03)'
     const defaultShadow = 'var( --ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) )'
 
-    const hidden = state.toLowerCase() !== 'printing' && !hiddenOverride;
+    const lowerState = state.toLowerCase();
+    const hidden = 
+        hiddenOverride ?
+            true  // respect 'always_show' parameter
+            : config.states_show && config.states_show.indexOf(lowerState) > -1 ?
+                false   // show when state matches list
+                : config.states_hide && config.states_hide.indexOf(lowerState) > -1 ?
+                    true   // hide when state matches list
+                    : lowerState !== 'printing';  // default behavior
     const statusColor =
-        state.toLowerCase() === 'printing' ?
+        lowerState === 'printing' ?
             "#4caf50"
-            : state.toLowerCase() === "unknown" ?
+            : lowerState === "unknown" || lowerState === "unavailable" ?
                 "#f44336"
-                : state.toLowerCase() === "operational" || state.toLowerCase() === "idle" ?
+                : lowerState === "operational" || lowerState === "idle" ?
                     "#00bcd4"
-                    : "#ffc107"
+                    : "#ffc107";
 
     return (
         <motion.div
