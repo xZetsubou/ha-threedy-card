@@ -66,7 +66,7 @@ const Card = ({ }) => {
     const lowerState = state.toLowerCase();
     const hidden = 
         hiddenOverride ?
-            true  // respect 'always_show' parameter
+            false  // respect 'always_show' parameter
             : config.states_show && config.states_show.indexOf(lowerState) > -1 ?
                 false   // show when state matches list
                 : config.states_hide && config.states_hide.indexOf(lowerState) > -1 ?
