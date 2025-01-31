@@ -99,7 +99,7 @@ const TimeStat: React.FC<TimeStatProps> = ({timeEntity, name, condition, config,
     const [ lastIntervalId, setLastIntervalId ] = useState<number>(-1);
 
     const incTime = () => setTime( time => (parseInt(time) + parseInt(direction)) );
-    const showEmpty = status != "Printing";
+    const showEmpty = status.toLowerCase() != "printing";
 
     useEffect(() => {
 
