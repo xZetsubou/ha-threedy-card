@@ -189,7 +189,7 @@ sensors:
   Status: # return the state of printer | ( printing, stopped etc.. ) 
     entity: sensor.ender_3_pro_current_print_state
   Elapsed: # return how much time have been since print starts - Require Status to be defined | number
-    entity: sensor.eender_3_pro_print_duration
+    entity: sensor.ender_3_pro_print_duration # Ensure that the unit of measurement of this entity is Seconds "moonraker default is min".
   Remaining: # return how much time left to finish print - Require Status to be defined | number
     entity: sensor.ender_3_pro_print_eta
   ETA: # return how much time left to finish print - Require Status to be defined | number
