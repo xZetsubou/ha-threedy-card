@@ -47,6 +47,8 @@ export type ThreedyConfig = {
     power_entity?: string,
     camera_entity?: string,
     always_show?: boolean,
+    states_hide?: string[],
+    states_show?: string[],
     // camera_rotate?: boolean,
     // camera_mirror?: boolean,
     sensors?: object

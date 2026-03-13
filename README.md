@@ -101,10 +101,12 @@
 - ```camera_entity``` &mdash; Specify the entity ID of the camera entity you want to display **when the printer graphic is clicked**.
 - ```light_entity``` &mdash; Specify the entity ID of a light you want to toggle for the printer.
 - ```power_entity``` &mdash; Specify the entity ID of a power switch you want to toggle for the printer.
-- ```always_show``` &mdash; Override the auto collapse of the card.
+- ```always_show``` &mdash; Override the auto collapse of the card. Precedes checking `states_show`.
 - ```camera_rotate``` &mdash; Rotate camera 180deg. ``default: false``
 - ```camera_mirror``` &mdash; Mirror camera. ``default: false``
 - ```sensors``` &mdash; Override any sensor rather then depend on base_entity by sepcify Sensor property > `name`, `entity` and `attribute`.
+- ```states_show``` &mdash; Provide list of states according to which the card must be shown. Precedes checking `states_hide`.
+- ```states_hide``` &mdash; Provide list of states according to which the card must be hidden. Precedes default behavior (checking whether state is equal to `printing`).
   > Main Sensors options: ``Progress, Status, ETA, Elapsed, Remaining, Hotend and Bed``
   
   > You can add new custom sensor if you want ex
@@ -132,6 +134,7 @@ type: 'custom:threedy-card'
 base_entity: '' # You can use it if you want to override some of sensors and let some use base_etntity
 name: 'Ender 3 Pro'
 printer_type: I3
+always_show: true
 monitored:
   - Status
   - ETA
@@ -174,7 +177,6 @@ printer_type: I3
 camera_entity: camera.ender_3_pro_camera
 power_entity: switch.ender3pro_plug
 light_entity: light.ender3_printer
-always_show: true
 monitored: # by the order you want.
   - Status
   - FileName
@@ -183,6 +185,12 @@ monitored: # by the order you want.
   - Remaining
   - Hotend
   - Bed
+states_show:
+  - printing
+  - idle
+states_hide:
+  - unavailable
+  - unknown
 sensors:
   Progress: # return the print progress | 0 - 100
     entity: sensor.ender_3_pro_plus_progress 
